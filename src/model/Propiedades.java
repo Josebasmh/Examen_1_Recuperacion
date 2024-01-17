@@ -3,6 +3,9 @@ package model;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+/**
+ * Clase utilizada para guardar los datos de acceso a la BBDD en un archivo llamado "configuration.properties". 
+ */
 public class Propiedades {
 	private static Properties props = new Properties();
 	static {

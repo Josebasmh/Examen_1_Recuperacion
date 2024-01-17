@@ -6,6 +6,13 @@ public class Taller {
 	private Float precio;
 	private boolean disponible;
 	
+	/**
+	 * Constructor de clase Taller
+	 * @param c codigo
+	 * @param n nombre
+	 * @param p precio
+	 * @param d dispinible
+	 */
 	public Taller(String c, String n, Float p, boolean d) {
 		codigo=c;
 		nombre=n;

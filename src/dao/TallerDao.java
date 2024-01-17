@@ -13,6 +13,10 @@ public class TallerDao {
 	
 	private ConexionBD conexion;
 
+	/**
+	 * Carga los registros de la BBDD y los añade a un ObservableList que devuelve. 
+	 * @return lista de talleres.
+	 */
 	public ObservableList<Taller> cargarDatos() {
 		ObservableList<Taller>listaTaller= FXCollections.observableArrayList();
 		String consulta = "SELECT * FROM inventario;";
@@ -38,6 +42,10 @@ public class TallerDao {
 		return listaTaller;	
 	}
 
+	/**
+	 * Añade el taller pasado como parámetro para insertar en la BBDD.
+	 * @param t Taller
+	 */
 	public void aniadirTaller(Taller t) {
 		try {
 			conexion = new ConexionBD();
@@ -51,6 +59,11 @@ public class TallerDao {
 		}		
 	}
 
+	/**
+	 * Modifica el taller pasado como parámetro.
+	 * @param t Taller
+	 * @return true=éxito,false=error.
+	 */
 	public boolean actualizarTaller(Taller t) {
 		try {
 			conexion = new ConexionBD();
@@ -64,6 +77,11 @@ public class TallerDao {
 	
 	}
 	
+	/**
+	 * Ejecuta la consulta (menos SELECT) que se le pasa como parámetro
+	 * @param consulta
+	 * @return true=éxito,false=error.
+	 */
 	private boolean ejecutarConsulta(String consulta) {
 		try {			
 			conexion = new ConexionBD();

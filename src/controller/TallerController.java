@@ -59,7 +59,10 @@ public class TallerController implements Initializable{
     //Variables de clase\\
     private TallerDao dao = new TallerDao();
 
-    
+    /**
+     * Aarece una ventana auxiliar que muestra la versión y el nombre del alumno
+     * @param event
+     */
     @FXML
     void acercaDe(ActionEvent event) {
     	Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -70,6 +73,10 @@ public class TallerController implements Initializable{
         alert.showAndWait();
     }
     
+    /**
+     * Comprueba que los campos estén correctamente y si es así,modifica el registro seleccionado.
+     * @param event
+     */
     @FXML
     void actualizarProducto(ActionEvent event) {
     	try {
@@ -95,6 +102,10 @@ public class TallerController implements Initializable{
     	btnActualizar.setDisable(false);
     }
 
+    /**
+     * Añade el registro a la BBDD y actualiza la tabla.
+     * @param event
+     */
     @FXML
     void crearProducto(ActionEvent event) {
     	btnActualizar.setDisable(true);
@@ -121,8 +132,10 @@ public class TallerController implements Initializable{
     	btnCrear.setDisable(false);
     }
 
-	
-
+	/**
+	 * carga en los campos superiores el registro que seleccionamos en la tabla.
+	 * @param event
+	 */
 	@FXML
     void seleccionarProducto(MouseEvent event) {
 		btnActualizar.setDisable(false);
@@ -135,6 +148,10 @@ public class TallerController implements Initializable{
     	cbDisponible.setSelected(t.isDisponible());
     }
 	
+	/**
+	 * Modifica los campos superiores al estado inicial.
+	 * @param event
+	 */
     @FXML
     void limpiar(ActionEvent event) {
     	btnActualizar.setDisable(true);
@@ -147,6 +164,10 @@ public class TallerController implements Initializable{
     	cbDisponible.setSelected(false);
     }
 
+    /**
+     * Al iniciar la ventana, se sincronizan los campos con la clase y se les insertan 
+     * los registros de la BBDD.
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tcCodigo.setCellValueFactory(new PropertyValueFactory<Taller, String>("codigo"));
@@ -161,6 +182,10 @@ public class TallerController implements Initializable{
 		
 	}
 	
+	/**
+	 * Comprueba los datos de los campos de la parte superior.
+	 * @return mensaje de error.
+	 */
 	private ObservableList<String> comprobarCampos() {
 		ObservableList<String> camposNulos = FXCollections.observableArrayList();
     	if (tfCodigo.getText().length()!=5) {camposNulos.add("El campo Codigo debe contener 5 carácteres.\n");}
@@ -169,6 +194,10 @@ public class TallerController implements Initializable{
     	return camposNulos;
 	}
 	
+	/**
+	 * Comprueba si el campo precio contiene solo carácteres numéricos.
+	 * @return mensaje de error
+	 */
 	private String comprobarPrecio() {
 		if (!tfPrecio.getText().matches("^-?[0-9]+([\\.,][0-9]+)?$")) {
     		return "El campo Precio debe ser un decimal.\n";
@@ -177,6 +206,11 @@ public class TallerController implements Initializable{
     	}
 	}
 	
+	/**
+	 * Crea ventana auxiliar que puede ser de tipo Error/Información
+	 * @param tipoAlerta "E" / "I"
+	 * @param mensaje 
+	 */
     private void ventanaAlerta(String tipoAlerta, String mensaje) {
 		Alert alert = null;
 		switch (tipoAlerta) {
@@ -189,5 +223,4 @@ public class TallerController implements Initializable{
         alert.setContentText(mensaje);
         alert.showAndWait();
 	}
-
 }
