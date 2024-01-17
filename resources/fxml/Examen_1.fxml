@@ -20,9 +20,9 @@
    <children>
       <MenuBar prefWidth="800.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca De" />
             </items>
           </Menu>
         </menus>
