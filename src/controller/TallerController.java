@@ -59,6 +59,17 @@ public class TallerController implements Initializable{
     //Variables de clase\\
     private TallerDao dao = new TallerDao();
 
+    
+    @FXML
+    void acercaDe(ActionEvent event) {
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	String mensaje="Version: V1.0\nAutor: Joseba Martinez";
+    	alert.setTitle("ACERCA DE");
+    	alert.setHeaderText("EXAMEN DE RECU");
+    	alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+    
     @FXML
     void actualizarProducto(ActionEvent event) {
     	try {
@@ -81,6 +92,7 @@ public class TallerController implements Initializable{
     	}catch (Exception e) {    		
     		ventanaAlerta("E", e.getMessage());
     	}
+    	btnActualizar.setDisable(false);
     }
 
     @FXML
