@@ -59,7 +59,7 @@
          <children>
             <Button fx:id="btnCrear" mnemonicParsing="false" onAction="#crearProducto" prefWidth="100.0" text="Crear" />
             <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#actualizarProducto" prefWidth="100.0" text="Actualizar" />
-            <Button mnemonicParsing="false" prefWidth="100.0" text="Limpiar" />
+            <Button mnemonicParsing="false" onAction="#limpiar" prefWidth="100.0" text="Limpiar" />
          </children>
       </FlowPane>
       <TableView fx:id="tvTabla" onMouseClicked="#seleccionarProducto" prefHeight="300.0" prefWidth="200.0">
