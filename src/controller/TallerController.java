@@ -68,26 +68,24 @@ public class TallerController implements Initializable{
     	btnActualizar.setDisable(true);
     	try {
     		ObservableList<String>camposNulos = comprobarCampos();
-    		String campoPrecio = comprobarPrecio();
-        	if (!campoPrecio.isEmpty()) {
-        		throw new NumberFormatException(campoPrecio);
-        	}
-    		if (!camposNulos.isEmpty()) {
+    		String campoPrecio = comprobarPrecio();        	
+    		if (!camposNulos.isEmpty() || !campoPrecio.isEmpty()) {
         		Iterator<String> it = camposNulos.iterator();
         		String msg="";
         		while(it.hasNext()) {
         			msg= msg + it.next();
+        		}
+        		if(!campoPrecio.isEmpty()) {
+        			msg += campoPrecio;
         		}
         		throw new NullPointerException(msg);
         	}
         	boolean bdisponible= Boolean.getBoolean(cbDisponible.getText()); 
         	dao.aniadirTaller(new Taller(tfCodigo.getText(), tfNombre.getText(), Float.valueOf(tfPrecio.getText()) , bdisponible));
         	tvTabla.setItems(dao.cargarDatos());
-    	}catch (NullPointerException e) {    		
+    	}catch (Exception e) {    		
     		ventanaAlerta("E", e.getMessage());
-    	}catch (NumberFormatException e) {
-    		ventanaAlerta("E", e.getMessage());
-    	}  	
+    	}
     }
 
 	
