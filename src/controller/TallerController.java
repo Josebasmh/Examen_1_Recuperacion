@@ -134,6 +134,18 @@ public class TallerController implements Initializable{
     	tfPrecio.setText(t.getPrecio().toString());
     	cbDisponible.setSelected(t.isDisponible());
     }
+	
+    @FXML
+    void limpiar(ActionEvent event) {
+    	btnActualizar.setDisable(true);
+    	btnCrear.setDisable(false);
+    	tfCodigo.setDisable(false);
+    	
+    	tfCodigo.setText("");
+    	tfNombre.setText("");
+    	tfPrecio.setText("");
+    	cbDisponible.setSelected(false);
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
