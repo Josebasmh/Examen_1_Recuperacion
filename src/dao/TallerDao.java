@@ -38,4 +38,16 @@ public class TallerDao {
 		return listaTaller;	
 	}
 
+	public void aniadirTaller(Taller t) {
+		try {
+			conexion = new ConexionBD();
+			String consulta = "INSERT INTO inventario(cod,nombre_inventario,precio_inventario,disponibilidad_inventario) values('" +
+			t.getCodigo()+"','"+t.getNombre()+"',"+t.getPrecio()+","+t.isDisponible()+");";
+			PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
 }
