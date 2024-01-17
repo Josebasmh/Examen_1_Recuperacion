@@ -50,4 +50,30 @@ public class TallerDao {
 			e.printStackTrace();
 		}		
 	}
+
+	public boolean actualizarTaller(Taller t) {
+		try {
+			conexion = new ConexionBD();
+			String consulta = "UPDATE inventario SET nombre_inventario='"+t.getNombre()+
+					"',precio_inventario="+t.getPrecio()+
+					",disponibilidad_inventario="+t.isDisponible()+
+					" WHERE cod='"+t.getCodigo()+"';";
+			return ejecutarConsulta(consulta);
+		} catch (SQLException e) {return false;}
+		
+	
+	}
+	
+	private boolean ejecutarConsulta(String consulta) {
+		try {			
+			conexion = new ConexionBD();
+			PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+			int i = ps.executeUpdate(consulta);
+			conexion.CloseConexion();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
