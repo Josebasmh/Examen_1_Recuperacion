@@ -60,7 +60,26 @@ public class TallerController implements Initializable{
 
     @FXML
     void actualizarProducto(ActionEvent event) {
-
+    	try {
+    		ObservableList<String>camposNulos = comprobarCampos();
+    		String campoPrecio = comprobarPrecio();        	
+    		if (!camposNulos.isEmpty() || !campoPrecio.isEmpty()) {
+        		Iterator<String> it = camposNulos.iterator();
+        		String msg="";
+        		while(it.hasNext()) {
+        			msg= msg + it.next();
+        		}
+        		if(!campoPrecio.isEmpty()) {
+        			msg += campoPrecio;
+        		}
+        		throw new NullPointerException(msg);
+        	}
+        	boolean bdisponible= Boolean.getBoolean(cbDisponible.getText()); 
+        	dao.actualizarTaller(new Taller(tfCodigo.getText(), tfNombre.getText(), Float.valueOf(tfPrecio.getText()) , bdisponible));
+        	tvTabla.setItems(dao.cargarDatos());
+    	}catch (Exception e) {    		
+    		ventanaAlerta("E", e.getMessage());
+    	}
     }
 
     @FXML
@@ -86,13 +105,21 @@ public class TallerController implements Initializable{
     	}catch (Exception e) {    		
     		ventanaAlerta("E", e.getMessage());
     	}
+    	btnCrear.setDisable(false);
     }
 
 	
 
 	@FXML
     void seleccionarProducto(MouseEvent event) {
-
+		btnActualizar.setDisable(false);
+		btnCrear.setDisable(true);
+    	Taller t =tvTabla.getSelectionModel().getSelectedItem();
+    	tfCodigo.setText(t.getCodigo().toString());
+    	tfCodigo.setDisable(true);
+    	tfNombre.setText(t.getNombre().toString());
+    	tfPrecio.setText(t.getPrecio().toString());
+    	cbDisponible.setSelected(t.isDisponible());
     }
 
 	@Override
